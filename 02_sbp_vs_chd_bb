@@ -17,7 +17,7 @@ sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/BB_IV
                                  other_allele_col = "OA", 
                                  pval_col = "P_value",
                                  samplesize_col = "Total_sample_size")
-sbp_exp_dat[, "exposure"] = sbp_exp_dat[, "id.exposure"] = "SBP ACEI target, Gill"
+sbp_exp_dat[, "exposure"] = sbp_exp_dat[, "id.exposure"] = "SBP BB target, Gill"
 
 # Load Coronary heart disease data (outcome) 
 
