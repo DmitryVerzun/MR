@@ -5,6 +5,8 @@
 library(TwoSampleMR)
 library(MRInstruments)
 
+setwd('/mnt/polyomica/projects/MR_bmi_BP/data/drug_repurposing/')
+
 # Load SBP data, BB target: 6 SNPs (exposure)
 
 sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/BB_IV.txt",
@@ -38,7 +40,7 @@ stroke_out_dat[, "outcome"] = stroke_out_dat[, "id.outcome"] = "MEGASTROKE"
 
 # Data: SBP BB target 6 SNPs (exposure) vs Stroke (outcome)
 dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = stroke_out_dat)
-# Harmonising SBP ACEI target, Gill (SBP ACEI target, Gill) and MEGASTROKE (MEGASTROKE)
+# Harmonising SBP BB target, Gill (SBP BB target, Gill) and MEGASTROKE (MEGASTROKE)
 #Removing the following SNPs for being palindromic with intermediate allele frequencies:
 #rs1801253
 
