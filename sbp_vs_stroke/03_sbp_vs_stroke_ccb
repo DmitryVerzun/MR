@@ -5,6 +5,8 @@
 library(TwoSampleMR)
 library(MRInstruments)
 
+setwd('/mnt/polyomica/projects/MR_bmi_BP/data/drug_repurposing/')
+
 # Load SBP data, CCB target: 24 SNPs (exposure)
 
 sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/CCB_IV.txt",
