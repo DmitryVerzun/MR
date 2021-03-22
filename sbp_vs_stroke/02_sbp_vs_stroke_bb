@@ -1,0 +1,51 @@
+#The aim of this script is replication of Mendelian Randomisation analysis from Gill et al., 2019
+# for Systolic blood pressure
+# vs Stroke
+
+library(TwoSampleMR)
+library(MRInstruments)
+
+# Load SBP data, BB target: 6 SNPs (exposure)
+
+sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/BB_IV.txt",
+				                         clump = FALSE,
+				                         sep = "\t",
+				                         snp_col = "SNP",
+				                         beta_col = "Effect",
+				                         se_col = "SE",
+                                 effect_allele_col = "EA",
+                                 other_allele_col = "OA", 
+                                 pval_col = "P_value",
+                                 samplesize_col = "Total_sample_size")
+sbp_exp_dat[, "exposure"] = sbp_exp_dat[, "id.exposure"] = "SBP BB target, Gill"
+
+# Load Stroke data (outcome) 
+
+stroke_out_dat <- read_outcome_data(snps = sbp_exp_dat$SNP,
+                                   filename = "./00_raw_data/stroke/MEGASTROKE.1.AS.TRANS.out",
+                                   sep = " ",
+                                   snp_col = "MarkerName",
+                                   beta_col = "Effect",
+                                   se_col = "StdErr",
+                                   effect_allele_col = "Allele1",
+                                   other_allele_col = "Allele2",
+                                   eaf_col = "Freq1",
+                                   pval_col = "P-value",
+                                   samplesize_col = "n")
+stroke_out_dat[, "outcome"] = stroke_out_dat[, "id.outcome"] = "MEGASTROKE" 
+
+# Harmonize data
+
+# Data: SBP BB target 6 SNPs (exposure) vs Stroke (outcome)
+dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = chd_out_dat)
+# Harmonising SBP ACEI target, Gill (SBP ACEI target, Gill) and MEGASTROKE (MEGASTROKE)
+#Removing the following SNPs for being palindromic with intermediate allele frequencies:
+#rs1801253
+
+#keep all the SNPs
+
+dat$mr_keep <- TRUE
+
+#generate odds ratios
+
+or <- generate_odds_ratios(mr(dat))
