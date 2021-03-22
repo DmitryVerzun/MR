@@ -32,6 +32,20 @@ stroke_out_dat <- read_outcome_data(snps = NULL,
                                    eaf_col = "Freq1",
                                    pval_col = "P-value",
                                    samplesize_col = "n")
-stroke_out_dat[, "outcome"] = stroke_out_dat[, "id.outcome"] = "MEGASTROKE"      
+stroke_out_dat[, "outcome"] = stroke_out_dat[, "id.outcome"] = "MEGASTROKE"     
 
 #Harmonise data 
+
+dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = chd_out_dat)
+# Harmonising SBP ACEI target, Gill (SBP ACEI target, Gill) and MEGASTROKE (MEGASTROKE)
+#Removing the following SNPs for being palindromic with intermediate allele frequencies:
+#rs4291
+
+#keep the only SNP
+
+dat$mr_keep <- TRUE
+
+#generate odds ratios
+
+or <- generate_odds_ratios(mr(dat))
+
