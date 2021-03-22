@@ -5,7 +5,7 @@
 library(TwoSampleMR)
 library(MRInstruments)
 
-# Load SBP data, ACEI target: 1 SNP (exposure)
+# Load SBP data, BB target: 6 SNPs (exposure)
 
 sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/BB_IV.txt",
 				                         clump = FALSE,
