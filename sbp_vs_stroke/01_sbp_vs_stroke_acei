@@ -1,0 +1,37 @@
+#The aim of this script is replication of Mendelian Randomisation analysis from Gill et al., 2019
+# for Systolic blood pressure
+# vs Stroke
+
+library(TwoSampleMR)
+library(MRInstruments)
+
+# Load SBP data, ACEI target: 1 SNP (exposure)
+
+sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/ACEI_IV.txt",
+				                         clump = FALSE,
+				                         sep = "\t",
+				                         snp_col = "SNP",
+				                         beta_col = "Effect",
+				                         se_col = "SE",
+                                 effect_allele_col = "EA",
+                                 other_allele_col = "OA", 
+                                 pval_col = "P_value",
+                                 samplesize_col = "Total_sample_size")
+sbp_exp_dat[, "exposure"] = sbp_exp_dat[, "id.exposure"] = "SBP ACEI target, Gill"
+
+# Load Stroke data (outcome) 
+
+stroke_out_dat <- read_outcome_data(snps = NULL,
+                                   filename = "./00_raw_data/stroke/MEGASTROKE.1.AS.TRANS.out",
+                                   sep = " ",
+                                   snp_col = "MarkerName",
+                                   beta_col = "Effect",
+                                   se_col = "StdErr",
+                                   effect_allele_col = "Allele1",
+                                   other_allele_col = "Allele2",
+                                   eaf_col = "Freq1",
+                                   pval_col = "P-value",
+                                   samplesize_col = "n")
+stroke_out_dat[, "outcome"] = stroke_out_dat[, "id.outcome"] = "MEGASTROKE"      
+
+#Harmonise data 
