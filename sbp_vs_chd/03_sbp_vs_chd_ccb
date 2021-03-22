@@ -5,6 +5,8 @@
 library(TwoSampleMR)
 library(MRInstruments)
 
+setwd('/mnt/polyomica/projects/MR_bmi_BP/data/drug_repurposing/')
+
 # Load SBP data, CCB target: 24 SNPs (exposure)
 
 sbp_exp_dat <- read_exposure_data(filename = "./01_snp_lists/sbp/gill_2019/CCB_IV.txt",
@@ -38,7 +40,7 @@ chd_out_dat[, "outcome"] = chd_out_dat[, "id.outcome"] = "CHD CARDIOGRAM & CD4"
 
 # Data: SBP CBB target 24 SNPs (exposure) vs Coronary heart disease (outcome)
 dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = chd_out_dat)
-# Harmonising SBP ACEI target, Gill (SBP ACEI target, Gill) and CHD CARDIOGRAM & CD4 (CHD CARDIOGRAM & CD4)
+# Harmonising SBP CCB target, Gill (SBP CCB target, Gill) and CHD CARDIOGRAM & CD4 (CHD CARDIOGRAM & CD4)
 #Removing the following SNPs for being palindromic with intermediate allele frequencies:
 #rs10828452, rs12258967, rs12780039, rs150857355
 
