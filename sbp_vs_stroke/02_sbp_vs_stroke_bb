@@ -37,7 +37,7 @@ stroke_out_dat[, "outcome"] = stroke_out_dat[, "id.outcome"] = "MEGASTROKE"
 # Harmonize data
 
 # Data: SBP BB target 6 SNPs (exposure) vs Stroke (outcome)
-dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = chd_out_dat)
+dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = stroke_out_dat)
 # Harmonising SBP ACEI target, Gill (SBP ACEI target, Gill) and MEGASTROKE (MEGASTROKE)
 #Removing the following SNPs for being palindromic with intermediate allele frequencies:
 #rs1801253
