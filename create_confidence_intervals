@@ -1,0 +1,7 @@
+#a function that takes mr results and returns confidence intervals with an appropriate sbp-lowering correction
+
+create_confidence_intervals <- function(result, effect){
+    result$b <- effect * result$b
+    result$se <- effect * result$se
+    return(generate_odds_ratios(result))
+}
