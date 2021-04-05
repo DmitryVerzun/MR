@@ -23,7 +23,7 @@ sbp_exp_dat[, "exposure"] = sbp_exp_dat[, "id.exposure"] = "SBP ACEI target, Gil
 
 # Load Coronary heart disease data (outcome) 
 
-chd_out_dat <- read_outcome_data(snps = NULL,
+chd_out_dat <- read_outcome_data(snps = sbp_exp_dat$SNP,
                                 filename = "./00_raw_data/cad/chd_gwas_id_1282656.csv",
                                 sep = "\t",
                                 snp_col = "rs_id",
@@ -50,6 +50,7 @@ dat <- harmonise_data(exposure_dat = sbp_exp_dat, outcome_dat = chd_out_dat)
 dat$mr_keep <- TRUE
 
 #generate odds ratios
+result <- mr(dat)
 
-or <- generate_odds_ratios(mr(dat))
+create_confidence_intervals(result, -21.14)
                                 
