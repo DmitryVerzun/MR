@@ -50,4 +50,6 @@ dat$mr_keep <- TRUE
 
 #generate odds ratios
 
-or <- generate_odds_ratios(mr(dat))
+result <- mr(dat)
+
+create_confidence_intervals(result, -8.90)
